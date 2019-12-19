@@ -15,18 +15,21 @@
  */
 
 #include "mbed.h"
-#include "platform/mbed_thread.h"
 
 // Blinking rate in milliseconds
 #define BLINKING_RATE_MS                                                    500
+
+// define the Serial object
+Serial pc(USBTX, USBRX);
 
 int main()
 {
     // Initialise the digital pin LED1 as an output
     DigitalOut led(LED1);
-
+    
     while (true) {
         led = !led;
+        pc.printf("Blink! LED1 is now %d\r\n", led.read());
         thread_sleep_for(BLINKING_RATE_MS);
     }
 }
